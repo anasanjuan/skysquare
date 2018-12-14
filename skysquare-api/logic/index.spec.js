@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 
 const { mongoose, models: { User, Voter, Place, Picture, Tip } } = require('skysquare-data')
 const logic = require('.')
@@ -564,6 +565,7 @@ describe('logic', () => {
             })
 
             it('should succed on correct data', async () => {
+
                 const picture = await logic.addProfilePicture(user.id, file)
 
                 expect(picture).to.be.a('string')
@@ -1131,7 +1133,7 @@ describe('logic', () => {
 
     describe('places', () => {
         let user, placeName, latitude, longitude, location, address, userId, breakfast, lunch, dinner, coffee, nightLife, thingsToDo, number
-        
+
         beforeEach(async () => {
             let name = 'John'
             let surname = 'Doe'
@@ -1772,7 +1774,7 @@ describe('logic', () => {
 
             it('should succed on correct id', async () => {
                 const _place = await logic.retrievePlaceById(user.id, place.id)
-                debugger
+
                 expect(_place).not.to.be.instanceof(Place)
                 expect(_place.id).to.be.a('string')
                 expect(_place.name).to.equal(place.name)

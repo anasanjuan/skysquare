@@ -67,20 +67,18 @@ router.post('/users/:id/profilePicture', [bearerTokenParser, jwtVerifier, jsonBo
         const { params: { id }, sub } = req
 
         if (id !== sub) throw Error('token sub does not match user id')
-        debugger
+
         return new Promise((resolve, reject) => {
             const busboy = new Busboy({ headers: req.headers })
 
             busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
                 logic.addProfilePicture(id, file)
                     .then(url => {
-                        debugger
                         res.json({
                             data: url
                         })
                     })
                     .catch(err => {
-                        debugger
                         res.json({
                             error: err.message
                         })

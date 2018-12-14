@@ -17,7 +17,7 @@ import Profile from './components/Profile'
 import PlaceHeader from './components/PlaceHeader'
 import { Route, withRouter, Redirect } from 'react-router-dom'
 
-logic.url = process.env.REACT_APP_API_URL 
+logic.url = process.env.REACT_APP_API_URL
 
 class App extends Component {
     state = { errorLogIn: null, errorRegister: null, placesByName: [], error: null }
@@ -28,22 +28,22 @@ class App extends Component {
 
 
     handleRegisterGoBack = () => {
-        this.setState({ errorLogIn: null, errorRegister: null, error: null}, () => this.props.history.push('/'))
+        this.setState({ errorLogIn: null, errorRegister: null, error: null }, () => this.props.history.push('/'))
     }
 
     handleLogInGoBack = () => {
-        this.setState({ errorLogIn: null, errorRegister: null, error: null}, () => this.props.history.push('/register'))
+        this.setState({ errorLogIn: null, errorRegister: null, error: null }, () => this.props.history.push('/register'))
     }
 
     handleLogoutClick = () => {
         logic.logOut()
 
-        this.setState({ errorLogIn: null, errorRegister: null, error: null}, () => this.props.history.push('/'))
+        this.setState({ errorLogIn: null, errorRegister: null, error: null }, () => this.props.history.push('/'))
 
     }
 
     handleAddPlaceClick = () => {
-        this.setState({ errorLogIn: null, errorRegister: null, error: null}, () => this.props.history.push('/home/add-place'))
+        this.setState({ errorLogIn: null, errorRegister: null, error: null }, () => this.props.history.push('/home/add-place'))
 
     }
 
@@ -51,7 +51,7 @@ class App extends Component {
         try {
             logic.addPlace(name, address, latitude, longitude, breakfast, lunch, dinner, coffee, nightLife, thingsToDo)
                 .then(() => {
-                    this.setState({ errorLogIn: null, errorRegister: null, error: null}, () => this.props.history.push('/home/profile'))
+                    this.setState({ errorLogIn: null, errorRegister: null, error: null }, () => this.props.history.push('/home/profile'))
                 })
                 .catch(error => this.setState({ error: error.message }))
 
@@ -60,7 +60,7 @@ class App extends Component {
         }
     }
 
-    
+
     handleRegister = (name, surname, email, password, birthday, gender, phone) => {
         try {
             logic.register(name, surname, email, password, birthday, gender ? gender : null, phone ? phone : null)
@@ -76,8 +76,7 @@ class App extends Component {
                         || error.message === `${birthday} is not a string` || error.message === `${birthday} is empty or blank`
                         || error.message === `${gender} is not a string` || error.message === `${gender} is empty or blank`
                         || error.message === `${phone} is not a string` || error.message === `${phone} is empty or blank`) {
-                        
-                        debugger
+
                         this.setState({ errorRegister: error.message })
                     } else {
                         this.setState({ errorRegister: 'Oops! Something went wrong! Try later!' })
@@ -95,9 +94,8 @@ class App extends Component {
     handleLogIn = (email, password) => {
         try {
             logic.logIn(email, password)
-                .then(() => this.setState({ errorLogIn: null, errorRegister: null, error: null}, () => this.props.history.push('/home')))
+                .then(() => this.setState({ errorLogIn: null, errorRegister: null, error: null }, () => this.props.history.push('/home')))
                 .catch(error => {
-                    debugger
                     if (error.message === `user not found` || error.message === `incorrect user or password`
                         || error.message === `${email} is not a string` || error.message === `${email} is empty or blank`
                         || error.message === `${password} is not a string` || error.message === `${password} is empty or blank`) {
@@ -117,10 +115,10 @@ class App extends Component {
     }
 
     handleSearchSubmit = name => {
-        this.setState({ errorLogIn: null, errorRegister: null, error: null}, () => this.props.history.push(`/home/name/${name}`))
+        this.setState({ errorLogIn: null, errorRegister: null, error: null }, () => this.props.history.push(`/home/name/${name}`))
     }
 
-    
+
     renderPlace(placeId) {
         return (<div>
             <PlaceHeader id={placeId} />
@@ -148,7 +146,7 @@ class App extends Component {
     }
     render() {
         return (<div>
-                    
+
             {this.state.errorRegister && <Error className='error__register' onErrorOkClick={this.handleErrorRegisterClick} message={this.state.errorRegister} />}
             <Route exact path='/' render={() => !logic.loggedIn ? <Landing onRegisterClick={this.handleRegisterClick} onLogInClick={this.handleLogInClick} /> : <Redirect to="/home" />} />
             <Route path='/register' render={() => !logic.loggedIn ? <Register onRegister={this.handleRegister} OnGoBack={this.handleRegisterGoBack} onLogInClick={this.handleLogInClick} /> : <Redirect to="/home" />} />

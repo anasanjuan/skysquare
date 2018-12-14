@@ -46,7 +46,6 @@ describe('logic', ()=> {
 
                 return logic.logIn(dummyEmail, password)
                     .catch(err => {
-                        expect(err).not.to.be.undefined
                         expect(err.message).to.equal(`invalid username or password`)
                     })
             })
@@ -56,7 +55,6 @@ describe('logic', ()=> {
 
                 return logic.logIn(email, dummyPassword)
                     .catch(err => {
-                        expect(err).not.to.be.undefined
                         expect(err.message).to.equal(`invalid username or password`)
                     })
             })

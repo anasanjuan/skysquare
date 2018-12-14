@@ -28,7 +28,7 @@ In the **profile**, the user can see all his/her pictures and tips, **add a prof
 
 ## **Tecnical description**
 
-Skysquare is designed for mobile. The front is created using ReactJs, the back is based on nodeJs, Express and the data is storaged in cloudinary and MongoDB with mongoose.
+Skysquare is designed for mobile. The front is created using ReactJs, the back is based on nodeJs and Express and the data is storaged in cloudinary and MongoDB with mongoose.
 
 Written in Javascript, with some feature of ES6 and ESNext. It also uses Google Maps Api, moments and sessionStorage.
 

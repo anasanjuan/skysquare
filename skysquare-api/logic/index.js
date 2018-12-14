@@ -3,11 +3,11 @@
 const { models: { User, Voter, Place, Picture, Tip, } } = require('skysquare-data')
 const { AlreadyExistsError, AuthError, NotFoundError } = require('../errors')
 const validate = require('../utils/validate')
-let cloudinary = require('cloudinary')
 const moment = require('moment')
 
-const { MY_CLOUD_NAME, MY_API_KEY, MY_APY_SECRET } = process.env
+let cloudinary = require('cloudinary')
 
+const { MY_CLOUD_NAME, MY_API_KEY, MY_APY_SECRET } = process.env
 
 cloudinary.config({
     cloud_name: MY_CLOUD_NAME,
@@ -176,6 +176,7 @@ const logic = {
 
                 file.pipe(stream)
             })
+
             user.profilePicture = result.url
 
             user.profilePublicId = result.public_id
